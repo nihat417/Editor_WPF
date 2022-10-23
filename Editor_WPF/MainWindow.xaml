@@ -115,8 +115,7 @@
             
             <DockPanel Grid.Row="2">
                 <RichTextBox
-                    Width="750"
-                    Height="333"
+                    Margin="20"
                     Background="#DF928E">
                 </RichTextBox>
             </DockPanel>
