@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen" 
-        Background="Transparent">
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None" Loaded="Window_Loaded"
+        >
     <Border CornerRadius="15"
             Background="#F0CF65"
             BorderThickness="5"
@@ -16,109 +19,233 @@
 
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="5"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="5"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <DockPanel>
-                <Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="25"/>
+                </Grid.ColumnDefinitions>
+
+                
+                <Label 
+                    Grid.Column="0"
+                    Name="Titlewindow"
+                    FontSize="20"
+                    Content="Editor"
+                    VerticalAlignment="Center"
+                    Margin="10,-4,0,0">
+                </Label>
+
+                <Border
+                    Grid.Column="1"
+                    Width="24"
+                    Height="24">
+                    <Button 
+                            Name="btnminsize"
+                            BorderThickness="0"
+                            Content="-"
+                            Foreground="White"
+                            Background="#28AEED"
+                            FontSize="15"
+                            Cursor="Hand"
+                            Click="Btnminsize_Click">
+                    </Button>
+                </Border>
+
+                <Border
+                    Grid.Column="2"
+                    Width="24"
+                    Height="24">
+                    <Button 
+                            Name="Btnfullscreen"
+                            BorderThickness="0"
+                            Content="++"
+                            FontSize="15"
+                            Foreground="White"
+                            Cursor="Hand"
+                            Background="#28AEED"
+                            Click="Btnfullscreen_Click">
+                    </Button>
+                </Border>
+
+                <Border 
+                    Grid.Column="3"
+                    Width="24"
+                    Height="24">
+                    <Button
+                        Grid.Column="3"
+                        Name="Exitbtn"
+                        Content="X"
+                        Cursor="Hand"
+                        BorderThickness="0"
+                        FontSize="15"
+                        Foreground="White"
+                        Background="DarkRed"
+                        Click="Exitbtn_Click">
+                    </Button>
+                </Border>
+            </Grid>
+
+            <Label Grid.Row="1" Background="#DDEDAA"/>
+
+
+
+
+            <DockPanel Grid.Row="2">
+                <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="250"/>
-                         <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Canvas>
-                        <TextBox
-                        Margin="20,16,0,0"
-                        Background="White"
-                        Height="24"
-                        Width="200">
-                        </TextBox>
+                        <Menu>
+                            <MenuItem Header="&#9776;" Background="LightGoldenrodYellow"
+                                      >
+                                <MenuItem Header="Open File" Click="OpenFile_Click"/>
+                                <MenuItem Header="Save File" Click="SaveFile_Click"/>
+                            </MenuItem>
+                        </Menu>
+                    </Canvas>
+                    
+                    
+                    <Canvas>
+                        <Label Content="Font"
+                               Background="#F0CF65"
+                               Margin="75,1,0,0"
+                               FontSize="15"                               
+                                ></Label>
                     </Canvas>
                     <Canvas>
-                        <Button
-                            Canvas.Right="0"
-                            Width="22"
-                            Height="22"
-                            VerticalAlignment="Top"
-                            Grid.Row="0" Grid.Column="1"
-                            Margin="20,17,0,0"
-                            Background="Beige" 
-                            />
+                        <ComboBox Name="Combobox_Fonts" Margin="45,25,0,0" Width="100" Background="Gold" SelectionChanged="ComboBox_SelectionChanged" ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}">
+                        </ComboBox>
+                    </Canvas>
+                    
+                    
+                    <Canvas>
+                        <Label Content="Size"
+                               Background="#F0CF65"
+                               Margin="210,1,0,0"
+                               FontSize="15"                               
+                                ></Label>
                     </Canvas>
                     <Canvas 
                         Grid.Row="0" 
-                        Grid.Column="1">
-                        <Button
-                            Margin="30,16,0,0"
-                            Height="24"
-                            Width="50"
-                            FontSize="17"
-                            Background="Beige"
-                            Content="Save"></Button>
-                        <CheckBox
-                            Height="14"
-                            Width="13"
-                            Background="Beige"
-                            Margin="83,16,0,0"
-                            >
-                            <CheckBox.LayoutTransform>
-                                <ScaleTransform ScaleX="1.7" ScaleY="1.7" />
-                            </CheckBox.LayoutTransform>
-                        </CheckBox>
+                        Grid.Column="0">
+                        <ComboBox Name="Combobox_Sizes" Margin="185,25,0,0" Width="100" Background="Gold"                                    
+                                  ItemsSource="{Binding MyDataSource}" 
+                                  SelectionChanged="Combobox_Sizes_SelectionChanged">
+                        </ComboBox>
                     </Canvas>
-                   
-                    <Canvas Grid.Column="2">
+
+                    <Canvas>
+                        <Label Content="Color"
+                               Background="#F0CF65"
+                               Margin="345,1,0,0"
+                               FontSize="15"                               
+                                ></Label>
+                    </Canvas>
+                    
+                    <Canvas 
+                        Grid.Row="0" 
+                        Grid.Column="0">
+                        <ComboBox Name="Combobox_Colors" Margin="320,25,0,0" 
+                                  Width="100" Background="Gold"                                    
+                                  SelectionChanged="Combobox_Colors_SelectionChanged">
+                        </ComboBox>
+                    </Canvas>
+
+                    <Canvas Grid.Column="0">
                         <Button
-                            Margin="20,16,0,0"
+                            Margin="480,25,0,0"
                             Height="24"
                             Width="35"
                             FontSize="17"
                             Background="Beige"
-                            Content="Cut"></Button>
+                            Content="+"
+                            Click="FontSize_Up"></Button>
                     </Canvas>
-                    <Canvas Grid.Column="2">
+
+
+                    <Canvas Grid.Column="0">
                         <Button
-                             Margin="60,16,0,0"
+                            Margin="520,25,0,0"
                             Height="24"
-                            Width="45"
+                            Width="35"
                             FontSize="17"
                             Background="Beige"
-                            Content="Paste"></Button>
+                            Content="-"
+                            Click="FontSize_Down"></Button>
                     </Canvas>
-                    <Canvas Grid.Column="2">
+
+
+
+                    <Canvas Grid.Column="0">
                         <Button
-                             Margin="110,14,0,0"
-                            Height="26"
-                            Width="55"
+                            Margin="600,25,0,0"
+                            Height="24"
+                            Width="35"
                             FontSize="17"
                             Background="Beige"
-                            Content="Copy"></Button>
+                            Content="B"
+                            Click="Bold_Click"></Button>
                     </Canvas>
+                    <Canvas Grid.Column="0">
+                        <Button
+                             Margin="640,25,0,0"
+                            Height="24"
+                            Width="35"
+                            FontSize="17"
+                            Background="Beige"
+                            Content="i"
+                            Click="Italic_Click"></Button>
+                    </Canvas>
+
+                    <Canvas Grid.Column="0">
+                        <Button
+                             Margin="680,25,0,0"
+                            Height="24"
+                            Width="35"
+                            FontSize="17"
+                            Background="Beige"
+                            Content="U"
+                            Click="Underline_Click"></Button>
+                    </Canvas>
+
+                    <Canvas Grid.Column="0">
+                        <Button
+                             Margin="720,25,0,0"
+                            Height="24"
+                            Width="35"
+                            FontSize="17"
+                            Background="Beige"
+                            Content="N"
+                            Click="Normalize_Click"></Button>
+                    </Canvas>
+
                     
-                     <Canvas Grid.Column="3">
-                        <Button
-                             Margin="170,14,0,0"
-                            Height="26"
-                            Width="85"
-                            FontSize="17"
-                            Background="Beige"
-                            Content="Select All"></Button>
-                    </Canvas>
                 </Grid>
             </DockPanel>
 
             <Label
-                Grid.Row="1"
+                Grid.Row="3"
                 Background="#DDEDAA">
             </Label>
-            
-            <DockPanel Grid.Row="2">
+
+            <DockPanel Grid.Row="4">
                 <RichTextBox
+                    Name="Richtextbox1"
                     Margin="20"
                     Background="#DF928E">
                 </RichTextBox>
             </DockPanel>
+
+
         </Grid>
     </Border>
 </Window>
