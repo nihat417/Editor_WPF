@@ -66,12 +66,16 @@
                     <Button 
                             Name="Btnfullscreen"
                             BorderThickness="0"
-                            Content="++"
+                            
                             FontSize="15"
                             Foreground="White"
                             Cursor="Hand"
                             Background="#28AEED"
                             Click="Btnfullscreen_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="C:\Users\Администратор\source\repos\Editor_WPF\Editor_WPF\Pictures\free-icon-minimize-video-6059154 (1).png" Width="20" Height="20"/>
+                            <TextBlock Text="Blablabla" VerticalAlignment="Center" />
+                        </StackPanel>
                     </Button>
                 </Border>
 
