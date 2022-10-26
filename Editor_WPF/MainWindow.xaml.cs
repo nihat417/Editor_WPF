@@ -151,11 +151,11 @@ namespace Editor_WPF
                 OpenFileDialog op = new OpenFileDialog();
                 op.Filter = "Text Files |*.txt";
 
-                //if (op.ShowDialog() == DialogResult.OK)
-                //{
-                //    using StreamReader sr = new(op.FileName);
-                //    Richtextbox1.Document.Blocks.Add(new Paragraph(new Run(sr.ReadToEnd())));
-                //}
+                if (op.ShowDialog() == true)
+                {
+                    using StreamReader sr = new(op.FileName);
+                    Richtextbox1.Document.Blocks.Add(new Paragraph(new Run(sr.ReadToEnd())));
+                }
                 
             }    
         }
